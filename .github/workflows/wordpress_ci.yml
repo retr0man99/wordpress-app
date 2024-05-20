@@ -23,6 +23,4 @@ jobs:
       run: composer install
 
     - name: Run Coding Standards Check
-      run: |
-        composer global require "squizlabs/php_codesniffer=*"
-        ~/.composer/vendor/bin/phpcs
+      run: composer phpcs -p -- --standard=phpcs.xml
