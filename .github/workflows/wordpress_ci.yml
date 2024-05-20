@@ -1,0 +1,28 @@
+name: WordPress CI Workflow
+
+on:
+  push:
+    branches:
+      - master
+      - 'feature/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: Install dependencies
+      run: composer install
+
+    - name: Run Coding Standards Check
+      run: |
+        composer global require "squizlabs/php_codesniffer=*"
+        ~/.composer/vendor/bin/phpcs
